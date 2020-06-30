@@ -1,0 +1,21 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+
+    package="me.aaa.mvvm">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <application>
+        <activity
+            android:name="com.zhen.mvvm.base.ContainerActivity"
+            android:configChanges="orientation|keyboardHidden"></activity>
+        <activity
+            android:name="com.zhen.mvvm.crash.DefaultErrorActivity"
+            android:process=":error_activity" />
+
+        <provider
+            android:name="com.zhen.mvvm.crash.CaocInitProvider"
+            android:authorities="${applicationId}.customactivityoncrashinitprovider"
+            android:exported="false"
+            android:initOrder="101" />
+    </application>
+
+</manifest>
