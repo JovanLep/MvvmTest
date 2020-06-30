@@ -14,6 +14,6 @@ public class MainViewModel extends BaseViewModel<MainModel> {
 
     public MainViewModel(@NonNull Application application) {
         super(application);
-        userName.set("22222");
+        userName.set("6161561561");
     }
 }
