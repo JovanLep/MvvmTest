@@ -23,14 +23,19 @@ import io.reactivex.functions.Consumer;
 import com.zhen.mvvm.bus.event.SingleLiveEvent;
 
 /**
- * Created by goldze on 2017/6/15.
+ *
+ * @author lep
  */
 public class BaseViewModel<M extends BaseModel> extends AndroidViewModel implements IBaseViewModel, Consumer<Disposable> {
     protected M model;
-    private UIChangeLiveData uc;
-    //弱引用持有
+    private UiChangeLiveData uc;
+    /**
+     * 弱引用持有
+     */
     private WeakReference<LifecycleProvider> lifecycle;
-    //管理RxJava，主要针对RxJava异步操作造成的内存泄漏
+    /**
+     * 管理RxJava，主要针对RxJava异步操作造成的内存泄漏
+     */
     private CompositeDisposable mCompositeDisposable;
 
     public BaseViewModel(@NonNull Application application) {
@@ -63,9 +68,9 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
         return lifecycle.get();
     }
 
-    public UIChangeLiveData getUC() {
+    public UiChangeLiveData getUc() {
         if (uc == null) {
-            uc = new UIChangeLiveData();
+            uc = new UiChangeLiveData();
         }
         return uc;
     }
@@ -197,7 +202,7 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
         addSubscribe(disposable);
     }
 
-    public final class UIChangeLiveData extends SingleLiveEvent {
+    public static final class UiChangeLiveData extends SingleLiveEvent {
         private SingleLiveEvent<String> showDialogEvent;
         private SingleLiveEvent<Void> dismissDialogEvent;
         private SingleLiveEvent<Map<String, Object>> startActivityEvent;

@@ -21,9 +21,9 @@ import com.zhen.mvvm.bus.Messenger;
 
 
 /**
- * Created by goldze on 2017/6/15.
- * 一个拥有DataBinding框架的基Activity
- * 这里根据项目业务可以换成你自己熟悉的BaseActivity, 但是需要继承RxAppCompatActivity,方便LifecycleProvider管理生命周期
+ * LifecycleProvider管理生命周期
+ *
+ * @author lep
  */
 public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseViewModel> extends RxAppCompatActivity implements IBaseView {
     protected V binding;
@@ -39,7 +39,7 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
         //私有的初始化Databinding和ViewModel方法
         initViewDataBinding(savedInstanceState);
         //私有的ViewModel与View的契约事件回调逻辑
-        registorUIChangeLiveDataCallBack();
+        registerUiCallBack();
         //页面数据初始化方法
         initData();
         //页面事件监听的方法，一般用于ViewModel层转到View层的事件注册
@@ -92,25 +92,25 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
 
     /**
      * =====================================================================
+     * 注册ViewModel与View的契约UI回调事件
      **/
-    //注册ViewModel与View的契约UI回调事件
-    protected void registorUIChangeLiveDataCallBack() {
+    protected void registerUiCallBack() {
         //加载对话框显示
-        viewModel.getUC().getShowDialogEvent().observe(this, new Observer<String>() {
+        viewModel.getUc().getShowDialogEvent().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String title) {
                 showDialog(title);
             }
         });
         //加载对话框消失
-        viewModel.getUC().getDismissDialogEvent().observe(this, new Observer<Void>() {
+        viewModel.getUc().getDismissDialogEvent().observe(this, new Observer<Void>() {
             @Override
             public void onChanged(@Nullable Void v) {
                 dismissDialog();
             }
         });
         //跳入新页面
-        viewModel.getUC().getStartActivityEvent().observe(this, new Observer<Map<String, Object>>() {
+        viewModel.getUc().getStartActivityEvent().observe(this, new Observer<Map<String, Object>>() {
             @Override
             public void onChanged(@Nullable Map<String, Object> params) {
                 Class<?> clz = (Class<?>) params.get(BaseViewModel.ParameterField.CLASS);
@@ -119,7 +119,7 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
             }
         });
         //跳入ContainerActivity
-        viewModel.getUC().getStartContainerActivityEvent().observe(this, new Observer<Map<String, Object>>() {
+        viewModel.getUc().getStartContainerActivityEvent().observe(this, new Observer<Map<String, Object>>() {
             @Override
             public void onChanged(@Nullable Map<String, Object> params) {
                 String canonicalName = (String) params.get(BaseViewModel.ParameterField.CANONICAL_NAME);
@@ -128,14 +128,14 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
             }
         });
         //关闭界面
-        viewModel.getUC().getFinishEvent().observe(this, new Observer<Void>() {
+        viewModel.getUc().getFinishEvent().observe(this, new Observer<Void>() {
             @Override
             public void onChanged(@Nullable Void v) {
                 finish();
             }
         });
         //关闭上一层
-        viewModel.getUC().getOnBackPressedEvent().observe(this, new Observer<Void>() {
+        viewModel.getUc().getOnBackPressedEvent().observe(this, new Observer<Void>() {
             @Override
             public void onChanged(@Nullable Void v) {
                 onBackPressed();
@@ -247,19 +247,6 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
 
     }
 
-//    /**
-//     * 创建ViewModel
-//     *
-//     * @param cls
-//     * @param <T>
-//     * @return
-//     */
-//    public <T extends ViewModel> T createViewModel(FragmentActivity activity, Class<T> cls) {
-//        return ViewModelProviders.of(activity).get(cls);
-//        return ViewModelProvider.AndroidViewModelFactory.getInstance()
-//    }
-
-
     /**
      * 创建 ViewModel
      */
@@ -272,7 +259,7 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
             //如果没有指定泛型参数，则默认使用BaseViewModel
             modelClass = BaseViewModel.class;
         }
-            viewModel = (VM) new ViewModelProvider(this).get(modelClass);
+        viewModel = (VM) new ViewModelProvider(this).get(modelClass);
     }
 
 }

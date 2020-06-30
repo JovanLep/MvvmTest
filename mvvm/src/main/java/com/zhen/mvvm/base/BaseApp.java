@@ -9,10 +9,12 @@ import androidx.annotation.NonNull;
 import com.zhen.mvvm.utils.Utils;
 
 /**
- * Created by goldze on 2017/6/15.
+ *
+ * @author goldze
+ * @date 2017/6/15
  */
 
-public class BaseApplication extends Application {
+public class BaseApp extends Application {
     private static Application sInstance;
 
     @Override

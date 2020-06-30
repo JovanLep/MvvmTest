@@ -16,10 +16,10 @@ import com.trello.rxlifecycle4.components.support.RxAppCompatActivity;
 
 import me.aaa.mvvm.R;
 
-
 /**
  * 盛装Fragment的一个容器(代理)Activity
  * 普通界面只需要编写Fragment,使用此Activity盛装,这样就不需要每个界面都在AndroidManifest中注册一遍
+ * @author Lep
  */
 public class ContainerActivity extends RxAppCompatActivity {
     private static final String FRAGMENT_TAG = "content_fragment_tag";
@@ -70,11 +70,7 @@ public class ContainerActivity extends RxAppCompatActivity {
                 fragment.setArguments(args);
             }
             return fragment;
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
         throw new RuntimeException("fragment initialization failed!");

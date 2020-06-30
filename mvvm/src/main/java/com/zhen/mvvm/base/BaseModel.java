@@ -1,7 +1,7 @@
 package com.zhen.mvvm.base;
 
 /**
- * Created by goldze on 2017/6/15.
+ * @author lep
  */
 public class BaseModel implements IModel {
 

@@ -1,14 +1,13 @@
 package com.zhen.mvvm.base;
 
 import android.app.Activity;
-
 import java.util.Stack;
-
 import androidx.fragment.app.Fragment;
 
 /**
- * Created by goldze on 2017/6/15.
  * activity堆栈式管理
+ *
+ * @author lep
  */
 public class AppManager {
 
@@ -45,7 +44,7 @@ public class AppManager {
      */
     public void addActivity(Activity activity) {
         if (activityStack == null) {
-            activityStack = new Stack<Activity>();
+            activityStack = new Stack<>();
         }
         activityStack.add(activity);
     }
@@ -74,8 +73,7 @@ public class AppManager {
      * 获取当前Activity（堆栈中最后一个压入的）
      */
     public Activity currentActivity() {
-        Activity activity = activityStack.lastElement();
-        return activity;
+        return activityStack.lastElement();
     }
 
     /**
@@ -127,12 +125,13 @@ public class AppManager {
      * @author kymjs
      */
     public Activity getActivity(Class<?> cls) {
-        if (activityStack != null)
+        if (activityStack != null) {
             for (Activity activity : activityStack) {
                 if (activity.getClass().equals(cls)) {
                     return activity;
                 }
             }
+        }
         return null;
     }
 
@@ -142,7 +141,7 @@ public class AppManager {
      */
     public void addFragment(Fragment fragment) {
         if (fragmentStack == null) {
-            fragmentStack = new Stack<Fragment>();
+            fragmentStack = new Stack<>();
         }
         fragmentStack.add(fragment);
     }
@@ -172,8 +171,7 @@ public class AppManager {
      */
     public Fragment currentFragment() {
         if (fragmentStack != null) {
-            Fragment fragment = fragmentStack.lastElement();
-            return fragment;
+            return fragmentStack.lastElement();
         }
         return null;
     }
@@ -182,7 +180,7 @@ public class AppManager {
     /**
      * 退出应用程序
      */
-    public void AppExit() {
+    public void appExit() {
         try {
             finishAllActivity();
             // 杀死该应用进程

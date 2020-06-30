@@ -8,6 +8,9 @@ import com.example.mvvmapplication.databinding.ActivityLoginBinding;
 
 import com.zhen.mvvm.base.BaseActivity;
 
+/**
+ * @author Lep
+ */
 public class LoginActivity extends BaseActivity<ActivityLoginBinding,LoginModel> {
 
     @Override

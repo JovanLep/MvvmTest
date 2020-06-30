@@ -25,7 +25,9 @@ import androidx.lifecycle.ViewModelProviders;
 import com.zhen.mvvm.bus.Messenger;
 
 /**
- * Created by goldze on 2017/6/15.
+ *
+ * @author goldze
+ * @date 2017/6/15
  */
 public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseViewModel> extends RxFragment implements IBaseView {
     protected V binding;
@@ -111,21 +113,21 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     //注册ViewModel与View的契约UI回调事件
     protected void registorUIChangeLiveDataCallBack() {
         //加载对话框显示
-        viewModel.getUC().getShowDialogEvent().observe(this, new Observer<String>() {
+        viewModel.getUc().getShowDialogEvent().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String title) {
                 showDialog(title);
             }
         });
         //加载对话框消失
-        viewModel.getUC().getDismissDialogEvent().observe(this, new Observer<Void>() {
+        viewModel.getUc().getDismissDialogEvent().observe(this, new Observer<Void>() {
             @Override
             public void onChanged(@Nullable Void v) {
                 dismissDialog();
             }
         });
         //跳入新页面
-        viewModel.getUC().getStartActivityEvent().observe(this, new Observer<Map<String, Object>>() {
+        viewModel.getUc().getStartActivityEvent().observe(this, new Observer<Map<String, Object>>() {
             @Override
             public void onChanged(@Nullable Map<String, Object> params) {
                 Class<?> clz = (Class<?>) params.get(BaseViewModel.ParameterField.CLASS);
@@ -134,7 +136,7 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
             }
         });
         //跳入ContainerActivity
-        viewModel.getUC().getStartContainerActivityEvent().observe(this, new Observer<Map<String, Object>>() {
+        viewModel.getUc().getStartContainerActivityEvent().observe(this, new Observer<Map<String, Object>>() {
             @Override
             public void onChanged(@Nullable Map<String, Object> params) {
                 String canonicalName = (String) params.get(BaseViewModel.ParameterField.CANONICAL_NAME);
@@ -143,14 +145,14 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
             }
         });
         //关闭界面
-        viewModel.getUC().getFinishEvent().observe(this, new Observer<Void>() {
+        viewModel.getUc().getFinishEvent().observe(this, new Observer<Void>() {
             @Override
             public void onChanged(@Nullable Void v) {
                 getActivity().finish();
             }
         });
         //关闭上一层
-        viewModel.getUC().getOnBackPressedEvent().observe(this, new Observer<Void>() {
+        viewModel.getUc().getOnBackPressedEvent().observe(this, new Observer<Void>() {
             @Override
             public void onChanged(@Nullable Void v) {
                 getActivity().onBackPressed();

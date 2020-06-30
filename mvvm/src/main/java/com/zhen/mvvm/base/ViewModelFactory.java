@@ -10,7 +10,9 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 /**
- * Created by goldze on 2018/9/30.
+ *
+ * @author goldze
+ * @date 2018/9/30
  */
 
 public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
@@ -44,23 +46,15 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
         //反射动态实例化ViewModel
         try {
             String className = modelClass.getCanonicalName();
-            Class<?> classViewModel = Class.forName(className);
-            Constructor<?> cons = classViewModel.getConstructor(Application.class);
-            ViewModel viewModel = (ViewModel) cons.newInstance(mApplication);
-            return (T) viewModel;
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-            throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-            throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-            throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
-        } catch (InvocationTargetException e) {
+            if (className!=null){
+                Class<?> classViewModel = Class.forName(className);
+                Constructor<?> cons = classViewModel.getConstructor(Application.class);
+                ViewModel viewModel = (ViewModel) cons.newInstance(mApplication);
+                return (T) viewModel;
+            }else {
+                throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
+            }
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException e) {
             e.printStackTrace();
             throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
         }
