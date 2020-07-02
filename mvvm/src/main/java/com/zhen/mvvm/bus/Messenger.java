@@ -169,8 +169,6 @@ public class Messenger {
      */
     public <T> void register(Object recipient, Object token, boolean receiveDerivedMessagesToo, BindingConsumer<T> action, Class<T> tClass) {
 
-        Type messageType = tClass;
-
         HashMap<Type, List<WeakActionAndToken>> recipients;
 
         if (receiveDerivedMessagesToo) {
@@ -189,11 +187,11 @@ public class Messenger {
 
         List<WeakActionAndToken> list;
 
-        if (!recipients.containsKey(messageType)) {
+        if (!recipients.containsKey(tClass)) {
             list = new ArrayList<WeakActionAndToken>();
-            recipients.put(messageType, list);
+            recipients.put(tClass, list);
         } else {
-            list = recipients.get(messageType);
+            list = recipients.get(tClass);
         }
 
         WeakAction weakAction = new WeakAction<T>(recipient, action);

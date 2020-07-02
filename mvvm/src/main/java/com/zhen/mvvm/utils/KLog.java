@@ -134,7 +134,7 @@ public class KLog {
         } else {
             msg = objectMsg.toString();
         }
-        if (msg != null && type != JSON) {
+        if (type != JSON) {
             stringBuilder.append(msg);
         }
 
@@ -214,6 +214,8 @@ public class KLog {
                 printLine(tag, false);
             }
             break;
+            default:
+                break;
         }
 
     }
