@@ -9,12 +9,14 @@ import android.widget.LinearLayout;
 import me.aaa.mvvm.R;
 
 /**
- * Created by goldze on 2017/3/16.
+ * @author lep
  * 控制事件分发的LinearLayout
  */
 public class ControlDistributeLinearLayout extends LinearLayout {
-    //默认是不拦截事件,分发事件给子View
-    private boolean isDistributeEvent = false;
+    /**
+     * 默认是不拦截事件,分发事件给子View
+     */
+    private boolean isDistributeEvent;
 
     public ControlDistributeLinearLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);

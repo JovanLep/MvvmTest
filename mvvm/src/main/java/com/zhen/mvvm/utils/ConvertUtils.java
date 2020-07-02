@@ -14,6 +14,7 @@ import com.zhen.mvvm.utils.constant.TimeConstants;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -35,9 +36,7 @@ public final class ConvertUtils {
 
     /**
      * byteArr转hexString
-     * <p>例如：</p>
-     * bytes2HexString(new byte[] { 0, (byte) 0xa8 }) returns 00A8
-     *
+
      * @param bytes 字节数组
      * @return 16进制大写字符串
      */
@@ -55,9 +54,7 @@ public final class ConvertUtils {
 
     /**
      * hexString转byteArr
-     * <p>例如：</p>
-     * hexString2Bytes("00A8") returns { 0, (byte) 0xA8 }
-     *
+
      * @param hexString 十六进制字符串
      * @return 字节数组
      */
@@ -314,7 +311,7 @@ public final class ConvertUtils {
             e.printStackTrace();
             return null;
         } finally {
-            CloseUtils.closeIO(is);
+            closeIO(is);
         }
     }
 
@@ -379,7 +376,7 @@ public final class ConvertUtils {
             e.printStackTrace();
             return null;
         } finally {
-            CloseUtils.closeIO(os);
+           closeIO(os);
         }
     }
 
@@ -611,5 +608,18 @@ public final class ConvertUtils {
             }
         }
         return true;
+    }
+
+    public static void closeIO(final Closeable... closeables) {
+        if (closeables == null) return;
+        for (Closeable closeable : closeables) {
+            if (closeable != null) {
+                try {
+                    closeable.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

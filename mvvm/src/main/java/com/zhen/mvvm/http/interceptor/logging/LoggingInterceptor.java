@@ -53,7 +53,7 @@ public class LoggingInterceptor implements Interceptor {
         RequestBody requestBody = request.body();
 
         MediaType rContentType = null;
-        if (requestBody != null) {
+        if (requestBody != null && request.body()!=null) {
             rContentType = request.body().contentType();
         }
 

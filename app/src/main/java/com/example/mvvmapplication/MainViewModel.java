@@ -7,9 +7,11 @@ import androidx.databinding.ObservableField;
 
 import com.zhen.mvvm.base.BaseViewModel;
 
-public class MainViewModel extends BaseViewModel<MainModel> {
+public class MainViewModel extends BaseViewModel<MainRepository> {
 
-    //用户名的绑定
+    /**
+     * 用户名的绑定
+     */
     public ObservableField<String> userName = new ObservableField<>();
 
     public MainViewModel(@NonNull Application application) {

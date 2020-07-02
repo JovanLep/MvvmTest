@@ -8,8 +8,8 @@ import io.reactivex.observers.DisposableObserver;
 import com.zhen.mvvm.base.AppManager;
 
 /**
- * Created by goldze on 2017/5/10.
  * 统一的Code封装处理。该类仅供参考，实际业务逻辑, 根据需求来定义，
+ * @author Administrator
  */
 
 public abstract class ApiDisposableObserver<T> extends DisposableObserver<T> {

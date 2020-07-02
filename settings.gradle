@@ -1,3 +1,9 @@
+include ':category'
+include ':shopcart'
+include ':mine'
+include ':home'
+include ':login'
+include ':base'
 include ':mvvm'
 include ':app'
 rootProject.name = "MVVMApplication"

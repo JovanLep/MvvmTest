@@ -1,7 +1,8 @@
 package com.zhen.mvvm.http;
 
 /**
- * Created by goldze on 2017/5/11.
+ *
+ * @author lep
  */
 
 public class ResponseThrowable extends Exception {

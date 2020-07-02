@@ -1,7 +1,6 @@
 package com.zhen.mvvm.utils.constant;
 
 /**
- * Created by goldze on 2017/5/14.
  * 正则相关常量
  */
 public final class RegexConstants {
@@ -56,10 +55,6 @@ public final class RegexConstants {
      */
     public static final String REGEX_IP = "((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)";
 
-    ///////////////////////////////////////////////////////////////////////////
-    // 以下摘自http://tool.oschina.net/regex
-    ///////////////////////////////////////////////////////////////////////////
-
     /**
      * 正则：双字节字符(包括汉字在内)
      */
@@ -105,7 +100,4 @@ public final class RegexConstants {
      */
     public static final String REGEX_NEGATIVE_FLOAT = "^-[1-9]\\d*\\.\\d*|-0\\.\\d*[1-9]\\d*$";
 
-    ///////////////////////////////////////////////////////////////////////////
-    // If u want more please visit http://toutiao.com/i6231678548520731137
-    ///////////////////////////////////////////////////////////////////////////
 }

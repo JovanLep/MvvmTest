@@ -7,7 +7,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.mvvmapplication.databinding.ActivityMainBinding;
-import com.example.mvvmapplication.login.LoginActivity;
 
 import com.zhen.mvvm.base.BaseActivity;
 
@@ -44,8 +43,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
             } else {
                 Toast.makeText(MainActivity.this, model.userName.get(), Toast.LENGTH_SHORT).show();
             }
-
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
         }
     }
 

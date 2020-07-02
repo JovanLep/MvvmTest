@@ -1,4 +1,4 @@
-package com.zhen.mvvm.base;
+package com.zhen.base;
 
 import android.app.Activity;
 import android.app.Application;
@@ -6,21 +6,21 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 
+import com.tencent.mmkv.MMKV;
+import com.zhen.mvvm.base.AppManager;
 import com.zhen.mvvm.utils.Utils;
 
 /**
- *
- * @author goldze
- * @date 2017/6/15
+ * @author Administrator
  */
-
-public class BaseApp extends Application {
+public class BaseApplication extends Application {
     private static Application sInstance;
 
     @Override
     public void onCreate() {
         super.onCreate();
         setApplication(this);
+        MMKV.initialize(this);
     }
 
     /**

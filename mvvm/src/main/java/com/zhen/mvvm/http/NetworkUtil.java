@@ -24,6 +24,7 @@ public class NetworkUtil {
 
     /**
      * check NetworkAvailable
+     *
      * @param context
      * @return
      */
@@ -40,14 +41,15 @@ public class NetworkUtil {
 
     /**
      * getLocalIpAddress
+     *
      * @return
      */
     public static String getLocalIpAddress() {
         String ret = "";
         try {
-            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
+            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
                 NetworkInterface intf = en.nextElement();
-                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
+                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
                     InetAddress inetAddress = enumIpAddr.nextElement();
                     if (!inetAddress.isLoopbackAddress()) {
                         ret = inetAddress.getHostAddress().toString();
@@ -74,10 +76,7 @@ public class NetworkUtil {
                 NetworkInfo networkinfo = connectivity.getActiveNetworkInfo();
                 if (networkinfo != null) {
                     if (networkinfo.isAvailable() && networkinfo.isConnected()) {
-                        if (!connectionNetwork())
-                            return NET_CNNT_BAIDU_TIMEOUT;
-                        else
-                            return NET_CNNT_BAIDU_OK;
+                        return (!connectionNetwork()) ? NET_CNNT_BAIDU_TIMEOUT : NET_CNNT_BAIDU_OK;
                     } else {
                         return NET_NOT_PREPARE;
                     }
@@ -90,8 +89,8 @@ public class NetworkUtil {
     }
 
     /**
-     *ping "http://www.baidu.com"
-     * @return
+     * ping "http://www.baidu.com"
+     *
      */
     static private boolean connectionNetwork() {
         boolean result = false;
@@ -102,7 +101,7 @@ public class NetworkUtil {
             httpUrl.setConnectTimeout(TIMEOUT);
             httpUrl.connect();
             result = true;
-        } catch (IOException e) {
+        } catch (IOException ignored) {
         } finally {
             if (null != httpUrl) {
                 httpUrl.disconnect();
@@ -114,6 +113,7 @@ public class NetworkUtil {
 
     /**
      * check is3G
+     *
      * @param context
      * @return boolean
      */
@@ -130,6 +130,7 @@ public class NetworkUtil {
 
     /**
      * isWifi
+     *
      * @param context
      * @return boolean
      */
@@ -146,6 +147,7 @@ public class NetworkUtil {
 
     /**
      * is2G
+     *
      * @param context
      * @return boolean
      */
@@ -163,7 +165,7 @@ public class NetworkUtil {
     }
 
     /**
-     *  is wifi on
+     * is wifi on
      */
     public static boolean isWifiEnabled(Context context) {
         ConnectivityManager mgrConn = (ConnectivityManager) context

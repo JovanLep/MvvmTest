@@ -29,7 +29,7 @@ public class ExceptionHandle {
         ResponseThrowable ex;
         if (e instanceof HttpException) {
             HttpException httpException = (HttpException) e;
-            ex = new ResponseThrowable(e, ERROR.HTTP_ERROR);
+            ex = new ResponseThrowable(e, Error.HTTP_ERROR);
             switch (httpException.code()) {
                 case UNAUTHORIZED:
                     ex.message = "操作未授权";
@@ -57,31 +57,31 @@ public class ExceptionHandle {
         } else if (e instanceof JsonParseException
                 || e instanceof JSONException
                 || e instanceof ParseException || e instanceof MalformedJsonException) {
-            ex = new ResponseThrowable(e, ERROR.PARSE_ERROR);
+            ex = new ResponseThrowable(e, Error.PARSE_ERROR);
             ex.message = "解析错误";
             return ex;
         } else if (e instanceof ConnectException) {
-            ex = new ResponseThrowable(e, ERROR.NETWORD_ERROR);
+            ex = new ResponseThrowable(e, Error.NETWORD_ERROR);
             ex.message = "连接失败";
             return ex;
         } else if (e instanceof javax.net.ssl.SSLException) {
-            ex = new ResponseThrowable(e, ERROR.SSL_ERROR);
+            ex = new ResponseThrowable(e, Error.SSL_ERROR);
             ex.message = "证书验证失败";
             return ex;
         } else if (e instanceof ConnectTimeoutException) {
-            ex = new ResponseThrowable(e, ERROR.TIMEOUT_ERROR);
+            ex = new ResponseThrowable(e, Error.TIMEOUT_ERROR);
             ex.message = "连接超时";
             return ex;
         } else if (e instanceof java.net.SocketTimeoutException) {
-            ex = new ResponseThrowable(e, ERROR.TIMEOUT_ERROR);
+            ex = new ResponseThrowable(e, Error.TIMEOUT_ERROR);
             ex.message = "连接超时";
             return ex;
         } else if (e instanceof java.net.UnknownHostException) {
-            ex = new ResponseThrowable(e, ERROR.TIMEOUT_ERROR);
+            ex = new ResponseThrowable(e, Error.TIMEOUT_ERROR);
             ex.message = "主机地址未知";
             return ex;
         } else {
-            ex = new ResponseThrowable(e, ERROR.UNKNOWN);
+            ex = new ResponseThrowable(e, Error.UNKNOWN);
             ex.message = "未知错误";
             return ex;
         }
@@ -91,7 +91,7 @@ public class ExceptionHandle {
     /**
      * 约定异常 这个具体规则需要与服务端或者领导商讨定义
      */
-    class ERROR {
+    class Error {
         /**
          * 未知错误
          */
