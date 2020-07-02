@@ -65,9 +65,9 @@ ext {
     ]
     //组件化控制
     libset = [
-            isMineLib    : 1,
-            isHomeLib    : 1,
-            isCategoryLib: 1,
+            isMineLib       : 1,
+            isHomeLib       : 1,
+            isCategoryLib   : 1,
             isShopCartLib   : 1,
             isLoginLib      : 1,
     ]

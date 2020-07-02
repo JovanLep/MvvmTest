@@ -32,8 +32,20 @@ android {
     dataBinding {
         enabled true
     }
+
+    sourceSets {
+        main {
+            if (rootProject.ext.libset.isShopCartLib) {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/module/AndroidManifest.xml'
+            }
+        }
+    }
 }
 
 dependencies {
     api project(path: ':base')
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 }
