@@ -1,11 +1,11 @@
 package com.zhen.base.http;
 
-import com.zhen.base.utils.SnackBarUtils;
 import com.zhen.mvvm.base.AppManager;
 import com.zhen.mvvm.utils.KLog;
 import com.zhen.mvvm.utils.Utils;
 
 import io.reactivex.observers.DisposableObserver;
+
 
 /**
  * 统一的Code封装处理。该类仅供参考，实际业务逻辑, 根据需求来定义，
@@ -25,7 +25,7 @@ public abstract class ApiDisposableObserver<T> extends DisposableObserver<T> {
         e.printStackTrace();
         if (e instanceof ResponseThrowable) {
             ResponseThrowable rError = (ResponseThrowable) e;
-//            SnackBarUtils.showSnackBar(Utils.getContext(),rError.message);
+//            showSnackBar(Utils.getContext(),rError.message);
 //            ToastUtils.showShort();
             return;
         }

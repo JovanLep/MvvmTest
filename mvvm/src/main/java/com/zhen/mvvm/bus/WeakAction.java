@@ -2,8 +2,8 @@ package com.zhen.mvvm.bus;
 
 import java.lang.ref.WeakReference;
 
-import com.zhen.mvvm.binding.command.BindingAction;
-import com.zhen.mvvm.binding.command.BindingConsumer;
+import com.zhen.base.binding.command.BindingAction;
+import com.zhen.base.binding.command.BindingConsumer;
 
 
 /**
