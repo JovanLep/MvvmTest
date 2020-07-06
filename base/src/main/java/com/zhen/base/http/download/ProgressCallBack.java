@@ -2,8 +2,7 @@ package com.zhen.base.http.download;
 
 import android.util.Log;
 
-import com.zhen.mvvm.bus.RxBus;
-import com.zhen.mvvm.bus.RxSubscriptions;
+import com.zhen.base.bus.RxSubscriptions;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -81,14 +80,14 @@ public abstract class ProgressCallBack<T> {
      * 订阅加载的进度条
      */
     public void subscribeLoadProgress() {
-        mSubscription = RxBus.getDefault().toObservable(DownLoadStateBean.class)
-                .observeOn(AndroidSchedulers.mainThread()) //回调到主线程更新UI
-                .subscribe(new Consumer<DownLoadStateBean>() {
-                    @Override
-                    public void accept(final DownLoadStateBean progressLoadBean) throws Exception {
-                        progress(progressLoadBean.getBytesLoaded(), progressLoadBean.getTotal());
-                    }
-                });
+//        mSubscription = RxBus.getDefault().toObservable(DownLoadStateBean.class)
+//                .observeOn(AndroidSchedulers.mainThread()) //回调到主线程更新UI
+//                .subscribe(new Consumer<DownLoadStateBean>() {
+//                    @Override
+//                    public void accept(final DownLoadStateBean progressLoadBean) throws Exception {
+//                        progress(progressLoadBean.getBytesLoaded(), progressLoadBean.getTotal());
+//                    }
+//                });
         //将订阅者加入管理站
         RxSubscriptions.add(mSubscription);
     }

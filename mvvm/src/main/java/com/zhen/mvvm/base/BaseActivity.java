@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.zhen.mvvm.utils.MaterialDialogUtils;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.trello.rxlifecycle4.components.support.RxAppCompatActivity;
+import com.zhen.mvvm.utils.Utils;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -17,7 +18,6 @@ import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.zhen.mvvm.bus.Messenger;
 
 
 /**
@@ -52,7 +52,7 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     protected void onDestroy() {
         super.onDestroy();
         //解除Messenger注册
-        Messenger.getDefault().unregister(viewModel);
+//        Messenger.getDefault().unregister(viewModel);
         if (viewModel != null) {
             viewModel.removeRxBus();
         }
@@ -95,52 +95,52 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
      * 注册ViewModel与View的契约UI回调事件
      **/
     protected void registerUiCallBack() {
-        //加载对话框显示
-        viewModel.getUc().getShowDialogEvent().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String title) {
-                showDialog(title);
-            }
-        });
-        //加载对话框消失
-        viewModel.getUc().getDismissDialogEvent().observe(this, new Observer<Void>() {
-            @Override
-            public void onChanged(@Nullable Void v) {
-                dismissDialog();
-            }
-        });
-        //跳入新页面
-        viewModel.getUc().getStartActivityEvent().observe(this, new Observer<Map<String, Object>>() {
-            @Override
-            public void onChanged(@Nullable Map<String, Object> params) {
-                Class<?> clz = (Class<?>) params.get(BaseViewModel.ParameterField.CLASS);
-                Bundle bundle = (Bundle) params.get(BaseViewModel.ParameterField.BUNDLE);
-                startActivity(clz, bundle);
-            }
-        });
-        //跳入ContainerActivity
-        viewModel.getUc().getStartContainerActivityEvent().observe(this, new Observer<Map<String, Object>>() {
-            @Override
-            public void onChanged(@Nullable Map<String, Object> params) {
-                String canonicalName = (String) params.get(BaseViewModel.ParameterField.CANONICAL_NAME);
-                Bundle bundle = (Bundle) params.get(BaseViewModel.ParameterField.BUNDLE);
-                startContainerActivity(canonicalName, bundle);
-            }
-        });
-        //关闭界面
-        viewModel.getUc().getFinishEvent().observe(this, new Observer<Void>() {
-            @Override
-            public void onChanged(@Nullable Void v) {
-                finish();
-            }
-        });
-        //关闭上一层
-        viewModel.getUc().getOnBackPressedEvent().observe(this, new Observer<Void>() {
-            @Override
-            public void onChanged(@Nullable Void v) {
-                onBackPressed();
-            }
-        });
+//        //加载对话框显示
+//        viewModel.getUc().getShowDialogEvent().observe(this, new Observer<String>() {
+//            @Override
+//            public void onChanged(@Nullable String title) {
+//                showDialog(title);
+//            }
+//        });
+//        //加载对话框消失
+//        viewModel.getUc().getDismissDialogEvent().observe(this, new Observer<Void>() {
+//            @Override
+//            public void onChanged(@Nullable Void v) {
+//                dismissDialog();
+//            }
+//        });
+//        //跳入新页面
+//        viewModel.getUc().getStartActivityEvent().observe(this, new Observer<Map<String, Object>>() {
+//            @Override
+//            public void onChanged(@Nullable Map<String, Object> params) {
+//                Class<?> clz = (Class<?>) params.get(BaseViewModel.ParameterField.CLASS);
+//                Bundle bundle = (Bundle) params.get(BaseViewModel.ParameterField.BUNDLE);
+//                startActivity(clz, bundle);
+//            }
+//        });
+//        //跳入ContainerActivity
+//        viewModel.getUc().getStartContainerActivityEvent().observe(this, new Observer<Map<String, Object>>() {
+//            @Override
+//            public void onChanged(@Nullable Map<String, Object> params) {
+//                String canonicalName = (String) params.get(BaseViewModel.ParameterField.CANONICAL_NAME);
+//                Bundle bundle = (Bundle) params.get(BaseViewModel.ParameterField.BUNDLE);
+//                startContainerActivity(canonicalName, bundle);
+//            }
+//        });
+//        //关闭界面
+//        viewModel.getUc().getFinishEvent().observe(this, new Observer<Void>() {
+//            @Override
+//            public void onChanged(@Nullable Void v) {
+//                finish();
+//            }
+//        });
+//        //关闭上一层
+//        viewModel.getUc().getOnBackPressedEvent().observe(this, new Observer<Void>() {
+//            @Override
+//            public void onChanged(@Nullable Void v) {
+//                onBackPressed();
+//            }
+//        });
     }
 
     public void showDialog(String title) {
@@ -259,7 +259,7 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
             //如果没有指定泛型参数，则默认使用BaseViewModel
             modelClass = BaseViewModel.class;
         }
-        viewModel = (VM) new ViewModelProvider(this).get(modelClass);
+        viewModel = (VM) new ViewModelProvider(this,ViewModelFactory.getInstance(MvvmApp.getInstance())).get(modelClass);
     }
 
 }

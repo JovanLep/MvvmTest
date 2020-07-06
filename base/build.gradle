@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 
 android {
@@ -40,4 +41,10 @@ dependencies {
     api rootProject.ext.dependencies["material"]
     androidTestApi('androidx.test.ext:junit:1.1.1')
     androidTestApi('androidx.test.espresso:espresso-core:3.2.0')
+    implementation "androidx.core:core-ktx:+"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }

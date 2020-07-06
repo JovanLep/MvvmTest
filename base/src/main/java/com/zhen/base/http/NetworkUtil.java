@@ -1,5 +1,6 @@
 package com.zhen.base.http;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -73,7 +74,7 @@ public class NetworkUtil {
             ConnectivityManager connectivity = (ConnectivityManager) context
                     .getSystemService(Context.CONNECTIVITY_SERVICE);
             if (connectivity != null) {
-                NetworkInfo networkinfo = connectivity.getActiveNetworkInfo();
+                @SuppressLint("MissingPermission") NetworkInfo networkinfo = connectivity.getActiveNetworkInfo();
                 if (networkinfo != null) {
                     if (networkinfo.isAvailable() && networkinfo.isConnected()) {
                         return (!connectionNetwork()) ? NET_CNNT_BAIDU_TIMEOUT : NET_CNNT_BAIDU_OK;
@@ -167,6 +168,7 @@ public class NetworkUtil {
     /**
      * is wifi on
      */
+    @SuppressLint("MissingPermission")
     public static boolean isWifiEnabled(Context context) {
         ConnectivityManager mgrConn = (ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE);

@@ -7,20 +7,22 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 
 import com.tencent.mmkv.MMKV;
+import com.zhen.base.utils.PreferUtils;
 import com.zhen.mvvm.base.AppManager;
+import com.zhen.mvvm.base.MvvmApp;
 import com.zhen.mvvm.utils.Utils;
 
 /**
  * @author Administrator
  */
-public class BaseApplication extends Application {
+public class BaseApplication extends MvvmApp {
     private static Application sInstance;
 
     @Override
     public void onCreate() {
         super.onCreate();
         setApplication(this);
-        MMKV.initialize(this);
+        PreferUtils.initPrefUtils(this);
     }
 
     /**

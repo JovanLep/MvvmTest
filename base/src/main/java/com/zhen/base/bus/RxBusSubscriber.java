@@ -1,4 +1,4 @@
-package com.zhen.mvvm.bus;
+package com.zhen.base.bus;
 
 import io.reactivex.observers.DisposableObserver;
 
